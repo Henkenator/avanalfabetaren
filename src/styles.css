@@ -1,1 +1,29 @@
 /* You can add global styles to this file, and also import other style files */
+
+@font-face {
+  font-family: 'agent_redregular';
+  src: url('assets/fonts/agentred/agentred-webfont.woff2') format('woff2'),
+  url('assets/fonts/agentred/agentred-webfont.woff') format('woff');
+  font-weight: normal;
+  font-size: 50px;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'riffic';
+  src: url('assets/fonts/riffic/rifficfree-bold-webfont.woff2') format('woff2'),
+  url('assets/fonts/riffic/rifficfree-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
+:root {
+  /* CSS HEX */
+  --sizzling-red: #ff595eff;
+  --sunglow: #ffca3aff;
+  --yellow-green: #8ac926ff;
+  --green-blue-crayola: #1982c4ff;
+  --royal-purple: #6a4c93ff;
+}
+
