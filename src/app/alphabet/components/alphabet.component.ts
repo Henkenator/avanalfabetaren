@@ -21,6 +21,7 @@ export class AlphabetComponent implements OnInit {
   public active = false;
   public gameOngoing = false;
   public firstGame = true;
+  public caseFilter = 'uppercase';
   public correctPhrases = [
     'Snyggt!',
     'Bra jobbat!',
@@ -65,8 +66,10 @@ export class AlphabetComponent implements OnInit {
   }
 
   playAgain(): void {
+    this.nbrOfCorrectGuesses = 0;
+    this.nbrOfGuesses = 0;
     this.newLetters();
-    this.speak(`Ja, vi spelar en gång till! Tryck på bokstaven ${this.correctLetter}`);
+    this.speak(`Vi spelar en gång till! Tryck på bokstaven ${this.correctLetter}`);
     this.gameOngoing = true;
   }
 
@@ -120,11 +123,19 @@ export class AlphabetComponent implements OnInit {
       return 'darkgrey';
     }
     return 'grey';
+  }
 
+  switchCase(): void {
+    this.caseFilter = this.caseFilter === 'uppercase' ? 'lowercase' : 'uppercase';
   }
 
   gameOver(): void {
     this.gameOngoing = false;
+
+    this.speak('Spelet är slut.');
+    this.speak(this.getEndPhrase(this.nbrOfCorrectGuesses, this.nbrOfQuestions));
+    this.speak(`Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`);
+
     this.gameOverText = `Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`;
   }
 
@@ -133,6 +144,18 @@ export class AlphabetComponent implements OnInit {
       return this.correctPhrases[Math.floor(Math.random() * this.correctPhrases.length)];
     } else {
       return this.wrongPhrases[Math.floor(Math.random() * this.wrongPhrases.length)];
+    }
+  }
+
+  getEndPhrase(correctGuesses: number, nbrOfQuestions: number): string {
+    if (correctGuesses === nbrOfQuestions) {
+      return 'Wow! Alla rätt! Superduktigt!';
+    } else if (correctGuesses - 1 === nbrOfQuestions) {
+      return 'Det här gick ju galant! Nästan alla rätt!';
+    } else if (correctGuesses / nbrOfQuestions > 0.5) {
+      return 'Inte fy skam.';
+    } else {
+      return 'Vill du öva lite till?';
     }
   }
 

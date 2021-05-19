@@ -12,7 +12,10 @@
   <div class="row">
     <div class="col-6 text-center mt-3 mb-3" *ngFor="let letter of letters; let i = index">
       <button class="custom-button" [disabled]="!active || !gameOngoing" (click)="selectLetter(letter)" [ngStyle]="{'background-color': getColor(letter, true, (i + 1) % 4)}">
-        <span class="button-letter" [ngStyle]="{'color': getColor(letter, false, i)}">{{letter | uppercase}}</span>
+        <span class="button-letter" [ngStyle]="{'color': getColor(letter, false, i)}">
+          <span *ngIf="caseFilter === 'uppercase'">{{letter | uppercase}}</span>
+          <span *ngIf="caseFilter === 'lowercase'">{{letter | lowercase}}</span>
+        </span>
       </button>
     </div>
   </div>
@@ -29,7 +32,8 @@
 
   </div>
 
-  <div id="correct">Rätt bokstav: {{correctLetter | uppercase}}</div>
+  <i class="fas fa-arrow-up fa-3x ml-3 mb-3" style="color: var(--sunglow)" (click)="switchCase()"></i>
+  <div id="correct" class="ml-3">Rätt bokstav: {{correctLetter | uppercase}}</div>
 </div>
 
 
