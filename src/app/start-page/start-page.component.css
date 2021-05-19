@@ -1,0 +1,40 @@
+div {
+  font-family: riffic;
+}
+
+.abc-container {
+  background-color: var(--green-blue-crayola);
+}
+
+.welcome-text {
+  font-size: 5rem;
+}
+
+.welcome-text span:nth-child(1) {color: var(--sizzling-red);}
+.welcome-text span:nth-child(2) {color: var(--sunglow);}
+.welcome-text span:nth-child(3) {color: var(--royal-purple);}
+.welcome-text span:nth-child(4) {color: var(--yellow-green);}
+.welcome-text span:nth-child(5) {color: var(--sunglow);}
+.welcome-text span:nth-child(6) {color: var(--sizzling-red);}
+.welcome-text span:nth-child(7) {color: var(--yellow-green);}
+.welcome-text span:nth-child(8) {color: var(--royal-purple);}
+.welcome-text span:nth-child(9) {color: var(--sizzling-red);}
+
+.game-button {
+  padding:2.0em 3.0em;
+  margin:0 0.1em 0.1em 0;
+  border:0.16em solid rgba(255,255,255,0);
+  border-radius:2em;
+  box-sizing: border-box;
+  text-decoration:none;
+  font-weight:300;
+  text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
+  text-align:center;
+  transition: all 0.2s;
+  width: 250px;
+}
+
+.first-game {
+  color: var(--sunglow);
+  background-color: var(--sizzling-red);
+}
