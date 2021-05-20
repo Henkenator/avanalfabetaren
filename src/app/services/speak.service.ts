@@ -17,7 +17,10 @@ export class SpeakService {
     });
   }
 
-  speak(text: string): void {
+  speak(text: string, cancelOngoing: boolean = false): void {
+    if (cancelOngoing) {
+      this.speech.cancel();
+    }
     this.speech.speak({text});
   }
 }

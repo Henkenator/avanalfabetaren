@@ -10,7 +10,7 @@ import {SpeakService} from '../../services/speak.service';
 })
 export class GuessLetterComponent implements OnInit {
 
-  public letters: string[] = ['?', '?', '?', '?'];
+  public letters: string[];
   public correctLetter: string;
   public guessedLetter: string;
   public correct;
@@ -46,21 +46,20 @@ export class GuessLetterComponent implements OnInit {
               private speakService: SpeakService) { }
 
   ngOnInit(): void {
-    this.speakService.speak(`Nu ska vi spela 'Gissa rätt bokstav'. Tryck på play-knappen för att börja`);
+    this.speakService.speak(`Nu ska vi spela 'Gissa rätt bokstav'. Tryck på play-knappen för att börja`, true);
+    this.resetGame();
   }
 
   startGame(): void {
     this.firstGame = false;
     this.gameOngoing = true;
-    this.nbrOfCorrectGuesses = 0;
-    this.nbrOfGuesses = 0;
     this.setupTurn();
   }
 
   setupTurn(): void {
     this.newLetters();
     this.active = true;
-    this.speakService.speak(`Tryck på bokstaven ${this.correctLetter}`);
+    this.speakService.speak(`Tryck på bokstaven ${this.correctLetter}`, true);
   }
 
   gameOver(): void {
@@ -74,10 +73,17 @@ export class GuessLetterComponent implements OnInit {
   }
 
   playAgain(): void {
-    this.speakService.speak(`Vi spelar en gång till!`);
+    this.speakService.speak(`Vi spelar en gång till!`, true);
+    this.resetGame();
     setTimeout(() => {
       this.startGame();
     }, 2000);
+  }
+
+  resetGame(): void {
+    this.nbrOfCorrectGuesses = 0;
+    this.nbrOfGuesses = 0;
+    this.letters = ['?', '?', '?', '?'];
   }
 
   selectLetter(guess: string): void {

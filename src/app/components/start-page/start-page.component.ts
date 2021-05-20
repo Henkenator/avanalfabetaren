@@ -19,7 +19,7 @@ export class StartPageComponent implements OnInit {
 
   playWelcomeMessage(): void {
     this.gameService.currentUser$.pipe(take(1)).subscribe(name => {
-      this.speakService.speak(`Välkommen ${name}. Vad vill du spela för spel?`);
+      this.speakService.speak(`Välkommen ${name}. Vad vill du spela för spel?`, true);
     });
   }
 
