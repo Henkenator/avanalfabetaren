@@ -4,7 +4,8 @@ header {
 }
 
 h1 {
-  color: var(--yellow-green)
+  color: var(--yellow-green);
+  font-size: 1.5rem;
 }
 
 i {
@@ -48,4 +49,11 @@ a {
 
 .play-button {
   color: var(--yellow-green);
+}
+
+
+@media screen and (min-width: 992px) {
+  h1 {
+    font-size: 2.5rem;
+  }
 }
