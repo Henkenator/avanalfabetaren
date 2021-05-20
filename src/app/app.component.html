@@ -25,4 +25,10 @@
 
 </header>
 
-<router-outlet></router-outlet>
+<div *ngIf="firstLoad" class="first-load-container">
+  <div class="play-button-container">
+    <i (click)="onClickPlay()" class="far fa-play-circle fa-9x play-button"></i>
+  </div>
+</div>
+
+<router-outlet *ngIf="!firstLoad"></router-outlet>

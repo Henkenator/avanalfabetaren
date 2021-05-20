@@ -34,3 +34,18 @@ a {
   color: var(--sunglow);
   background-color: var(--sizzling-red);
 }
+
+.first-load-container {
+  background-color: var(--green-blue-crayola);
+  height: 100%;
+}
+.play-button-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.play-button {
+  color: var(--yellow-green);
+}

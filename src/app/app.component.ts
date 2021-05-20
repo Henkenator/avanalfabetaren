@@ -9,12 +9,11 @@ import {GameService} from './services/game.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'avanalfabetaren';
   currentRoute: string;
   currentGame: string;
   currentUser: string;
-
   editName = false;
+  firstLoad = true;
 
   constructor(private router: Router,
               private gameService: GameService) {
@@ -38,9 +37,12 @@ export class AppComponent {
   }
 
   changeName(name): void {
-    console.log(name);
     this.editName = false;
     this.gameService.setUser(name);
+  }
+
+  onClickPlay(): void {
+    this.firstLoad = false;
   }
 
 

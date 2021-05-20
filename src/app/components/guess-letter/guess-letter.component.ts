@@ -42,7 +42,7 @@ export class GuessLetterComponent implements OnInit {
     '--royal-purple'
   ];
 
-  constructor(private service: LetterService,
+  constructor(private letterService: LetterService,
               private speakService: SpeakService) { }
 
   ngOnInit(): void {
@@ -87,9 +87,9 @@ export class GuessLetterComponent implements OnInit {
   }
 
   selectLetter(guess: string): void {
-
     this.nbrOfGuesses++;
     this.guessedLetter = guess;
+    this.active = false;
 
     if (this.guessedLetter === this.correctLetter) {
       this.correct = true;
@@ -99,8 +99,6 @@ export class GuessLetterComponent implements OnInit {
     }
     this.speakService.speak(this.getPhrase(this.correct));
 
-    this.active = false;
-
     if (this.nbrOfGuesses < this.nbrOfQuestions) {
       setTimeout(() => {
        this.setupTurn();
@@ -108,12 +106,11 @@ export class GuessLetterComponent implements OnInit {
     } else {
       this.gameOver();
     }
-
   }
 
   newLetters(): void {
     this.guessedLetter = null;
-    this.letters = this.service.getRandomLetters(4);
+    this.letters = this.letterService.getRandomLetters(4);
     this.correctLetter = this.letters[Math.floor(Math.random() * 4)];
   }
 
@@ -130,7 +127,6 @@ export class GuessLetterComponent implements OnInit {
   switchCase(): void {
     this.caseFilter = this.caseFilter === 'uppercase' ? 'lowercase' : 'uppercase';
   }
-
 
   getPhrase(correct: boolean): string {
     if (correct){
