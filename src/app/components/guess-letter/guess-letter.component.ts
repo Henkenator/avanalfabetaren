@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {AlphabetService} from '../services/alphabet.service';
-import Speech from 'speak-tts';
+import {LetterService} from '../../services/letter.service';
+import {SpeakService} from '../../services/speak.service';
 
 
 @Component({
-  selector: 'app-alphabet',
-  templateUrl: './alphabet.component.html',
-  styleUrls: ['./alphabet.component.css']
+  selector: 'app-guess-letter',
+  templateUrl: './guess-letter.component.html',
+  styleUrls: ['./guess-letter.component.css']
 })
-export class AlphabetComponent implements OnInit {
+export class GuessLetterComponent implements OnInit {
 
   public letters: string[] = ['?', '?', '?', '?'];
   public correctLetter: string;
@@ -35,10 +35,6 @@ export class AlphabetComponent implements OnInit {
     'Synd!'
   ];
 
-
-  private speech = new Speech();
-
-
   private colors = [
     '--sizzling-red',
     '--sunglow',
@@ -46,37 +42,42 @@ export class AlphabetComponent implements OnInit {
     '--royal-purple'
   ];
 
-  constructor(private service: AlphabetService) { }
+  constructor(private service: LetterService,
+              private speakService: SpeakService) { }
 
   ngOnInit(): void {
-    this.speech.init({
-      volume: 1,
-      lang: 'sv-SE',
-      rate: 1,
-      pitch: 1,
-    });
-
+    this.speakService.speak(`Nu ska vi spela 'Gissa rätt bokstav'. Tryck på play-knappen för att börja`);
   }
 
   startGame(): void {
-    this.newLetters();
-    this.speak(`Hej Casper. Nu ska vi spela ett spel! Tryck på bokstaven ${this.correctLetter}`);
-    this.gameOngoing = true;
     this.firstGame = false;
+    this.gameOngoing = true;
+    this.nbrOfCorrectGuesses = 0;
+    this.nbrOfGuesses = 0;
+    this.setupTurn();
+  }
+
+  setupTurn(): void {
+    this.newLetters();
+    this.active = true;
+    this.speakService.speak(`Tryck på bokstaven ${this.correctLetter}`);
+  }
+
+  gameOver(): void {
+    this.gameOngoing = false;
+
+    this.speakService.speak('Spelet är slut.');
+    this.speakService.speak(this.getEndPhrase(this.nbrOfCorrectGuesses, this.nbrOfQuestions));
+    this.speakService.speak(`Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`);
+
+    this.gameOverText = `Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`;
   }
 
   playAgain(): void {
-    this.nbrOfCorrectGuesses = 0;
-    this.nbrOfGuesses = 0;
-    this.newLetters();
-    this.speak(`Vi spelar en gång till! Tryck på bokstaven ${this.correctLetter}`);
-    this.gameOngoing = true;
-  }
-
-
-  speak(text: string): void {
-    this.speech.speak({text});
-
+    this.speakService.speak(`Vi spelar en gång till!`);
+    setTimeout(() => {
+      this.startGame();
+    }, 2000);
   }
 
   selectLetter(guess: string): void {
@@ -90,21 +91,17 @@ export class AlphabetComponent implements OnInit {
     } else {
       this.correct = false;
     }
-    this.speak(this.getPhrase(this.correct));
+    this.speakService.speak(this.getPhrase(this.correct));
 
     this.active = false;
-    if (this.nbrOfGuesses < this.nbrOfQuestions) {
 
+    if (this.nbrOfGuesses < this.nbrOfQuestions) {
       setTimeout(() => {
-        this.newLetters();
-        this.speak(`Tryck på bokstaven ${this.correctLetter}`);
+       this.setupTurn();
       }, 2000);
     } else {
       this.gameOver();
     }
-
-
-
 
   }
 
@@ -112,7 +109,6 @@ export class AlphabetComponent implements OnInit {
     this.guessedLetter = null;
     this.letters = this.service.getRandomLetters(4);
     this.correctLetter = this.letters[Math.floor(Math.random() * 4)];
-    this.active = true;
   }
 
   getColor(letter, button, index: number): string {
@@ -129,15 +125,6 @@ export class AlphabetComponent implements OnInit {
     this.caseFilter = this.caseFilter === 'uppercase' ? 'lowercase' : 'uppercase';
   }
 
-  gameOver(): void {
-    this.gameOngoing = false;
-
-    this.speak('Spelet är slut.');
-    this.speak(this.getEndPhrase(this.nbrOfCorrectGuesses, this.nbrOfQuestions));
-    this.speak(`Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`);
-
-    this.gameOverText = `Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`;
-  }
 
   getPhrase(correct: boolean): string {
     if (correct){

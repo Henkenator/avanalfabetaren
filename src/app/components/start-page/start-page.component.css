@@ -4,6 +4,7 @@ div {
 
 .abc-container {
   background-color: var(--green-blue-crayola);
+  height: 100%;
 }
 
 .welcome-text {

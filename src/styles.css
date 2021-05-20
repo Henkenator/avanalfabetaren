@@ -27,3 +27,6 @@
   --royal-purple: #6a4c93ff;
 }
 
+html, body {
+  height: 100%;
+}

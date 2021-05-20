@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { AlphabetComponent } from './alphabet/components/alphabet.component';
+import { GuessLetterComponent } from './components/guess-letter/guess-letter.component';
 import {AppRoutingModule} from './app-routing.module';
-import { StartPageComponent } from './start-page/start-page.component';
+import { StartPageComponent } from './components/start-page/start-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AlphabetComponent,
+    GuessLetterComponent,
     StartPageComponent
   ],
   imports: [

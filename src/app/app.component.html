@@ -8,6 +8,18 @@
       <a routerLink="/" routerLinkActive="active" [hidden]="currentRoute === '/'" class="ml-auto mr-5">
         <i class="fas fa-long-arrow-alt-left fa-5x" (click)="resetGame()"></i>
       </a>
+
+      <a routerLink="/" routerLinkActive="active" [hidden]="currentRoute !== '/'" class="ml-auto mr-5">
+        <div *ngIf="!editName">
+          <span class="user pr-3">{{currentUser | uppercase}}</span>
+          <i class="fas fa-user-alt fa-2x" (click)="editName = true"></i>
+        </div>
+        <div *ngIf="editName">
+          <input style="width: 100px" #change>
+          <button class="user-button" (click)="changeName(change.value)">OK</button>
+        </div>
+      </a>
+
     </div>
   </div>
 

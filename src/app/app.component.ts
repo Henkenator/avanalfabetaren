@@ -12,13 +12,19 @@ export class AppComponent {
   title = 'avanalfabetaren';
   currentRoute: string;
   currentGame: string;
+  currentUser: string;
+
+  editName = false;
 
   constructor(private router: Router,
               private gameService: GameService) {
 
     gameService.currentGame$.subscribe(game => {
-      console.log(game);
       this.currentGame = game;
+    });
+
+    gameService.currentUser$.subscribe(name => {
+      this.currentUser = name;
     });
 
     router.events.pipe(filter(event => event instanceof NavigationEnd))
@@ -29,6 +35,12 @@ export class AppComponent {
 
   resetGame(): void {
     this.gameService.setGame('');
+  }
+
+  changeName(name): void {
+    console.log(name);
+    this.editName = false;
+    this.gameService.setUser(name);
   }
 
 

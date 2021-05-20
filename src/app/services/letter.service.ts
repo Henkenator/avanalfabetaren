@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class AlphabetService {
+export class LetterService {
 
   private letters: string[] = [
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',

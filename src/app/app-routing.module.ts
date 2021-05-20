@@ -1,11 +1,11 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {AlphabetComponent} from './alphabet/components/alphabet.component';
-import {StartPageComponent} from './start-page/start-page.component';
+import {GuessLetterComponent} from './components/guess-letter/guess-letter.component';
+import {StartPageComponent} from './components/start-page/start-page.component';
 
 const routes: Routes = [
   { path: '', component: StartPageComponent },
-  { path: 'alphabet', component: AlphabetComponent }
+  { path: 'guess-letter', component: GuessLetterComponent }
 ]; // sets up routes constant where you define your routes
 
 // configures NgModule imports and exports
