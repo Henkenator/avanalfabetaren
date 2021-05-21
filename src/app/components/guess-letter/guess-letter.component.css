@@ -9,21 +9,22 @@ div {
 
 
 .custom-button {
-  padding:2.0em 3.0em;
+  padding:0.3em 0.5em;
   margin:0 0.1em 0.1em 0;
   border:0.16em solid rgba(255,255,255,0);
   border-radius:2em;
   box-sizing: border-box;
   text-decoration:none;
-  font-weight:300;
+  font-weight: 100;
   text-shadow: 0 0.04em 0.04em rgba(0,0,0,0.35);
   text-align:center;
   transition: all 0.2s;
-  width: 250px;
+  height: 165px ;
+  width: 165px;
 }
 
 .button-letter {
-  font-size: 120px;
+  font-size: 80px;
 }
 
 .score {
@@ -31,6 +32,13 @@ div {
 }
 
 .start-button-container {
+  width:350px;
+  height: 300px;
+  background-color: var(--sizzling-red);
+  padding:0.3em 0.5em;
+  margin:0 0.1em 0.1em 0;
+  border: 0.5em solid var(--sunglow);
+  border-radius:2em;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -39,8 +47,56 @@ div {
 
 .start-button {
   color: var(--yellow-green);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .game-over-text {
   color: var(--sunglow);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%);
+}
+
+.bottom-right {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+@media screen and (min-width: 576px) {
+  .custom-button {
+    padding:2.0em 3.0em;
+    margin:0 0.1em 0.1em 0;
+    font-weight:300;
+    width: 200px;
+    height: 200px;
+  }
+  .button-letter {
+    font-size: 100px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 992px) {
+  .custom-button {
+    padding:2.0em 3.0em;
+    margin:0 0.1em 0.1em 0;
+    font-weight:300;
+    width: 225px;
+    height: 225px;
+  }
+
+  .button-letter {
+    font-size: 120px;
+  }
+  .start-button-container {
+    top: 55%;
+  }
 }
