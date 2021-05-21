@@ -8,7 +8,7 @@ div {
 }
 
 .welcome-text {
-  font-size: 5rem;
+  font-size: 3.5rem;
 }
 
 .welcome-text span:nth-child(1) {color: var(--sizzling-red);}
@@ -38,4 +38,17 @@ div {
 .first-game {
   color: var(--sunglow);
   background-color: var(--sizzling-red);
+}
+
+@media screen and (min-width: 576px) {
+  .welcome-text {
+    font-size: 5rem;
+  }
+}
+
+
+@media screen and (min-width: 992px) {
+  .welcome-text {
+    font-size: 5rem;
+  }
 }
