@@ -85,7 +85,7 @@ div {
 }
 
 @media screen and (min-width: 992px) {
-  .custom-button {
+  /*.custom-button {
     padding:2.0em 3.0em;
     margin:0 0.1em 0.1em 0;
     font-weight:300;
@@ -98,5 +98,5 @@ div {
   }
   .start-button-container {
     top: 55%;
-  }
+  }*/
 }
