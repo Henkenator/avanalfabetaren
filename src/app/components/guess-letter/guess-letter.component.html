@@ -20,13 +20,13 @@
     </div>
   </div>
 
-  <div class="start-button-container" *ngIf="!gameOngoing">
+  <div class="start-button-container" *ngIf="!gameOngoing && !pause">
     <div *ngIf="firstGame">
       <i (click)="startGame()" class="far fa-play-circle fa-9x start-button"></i>
     </div>
 
     <div *ngIf="!firstGame">
-      <i (click)="playAgain()" class="fas fa-redo-alt fa-9x start-button"></i>
+      <i (click)="playAgain()" [hidden]="playAgainButtonCooldown" class="fas fa-redo-alt fa-9x start-button"></i>
       <div class="mt-3 game-over-text mb-3"><span>{{gameOverText}}</span></div>
     </div>
 

@@ -22,6 +22,8 @@ export class GuessLetterComponent implements OnInit {
   public gameOngoing = false;
   public firstGame = true;
   public caseFilter = 'uppercase';
+  public pause = false;
+  public playAgainButtonCooldown = false;
   public correctPhrases = [
     'Snyggt!',
     'Bra jobbat!',
@@ -47,6 +49,7 @@ export class GuessLetterComponent implements OnInit {
 
   ngOnInit(): void {
     this.speakService.speak(`Nu ska vi spela 'Gissa rätt bokstav'. Tryck på play-knappen för att börja`, true);
+    this.pauseNbrOfSeconds(4);
     this.resetGame();
   }
 
@@ -65,14 +68,20 @@ export class GuessLetterComponent implements OnInit {
   gameOver(): void {
     this.gameOngoing = false;
 
-    this.speakService.speak('Spelet är slut.');
-    this.speakService.speak(this.getEndPhrase(this.nbrOfCorrectGuesses, this.nbrOfQuestions));
-    this.speakService.speak(`Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`);
+    this.playAgainButtonCooldown = true;
+    setTimeout(() => {
+      this.playAgainButtonCooldown = false;
+    }, 6000)
 
+    // this.speakService.speak('Spelet är slut.');
+    this.speakService.speak(`Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`);
+    this.speakService.speak(this.getEndPhrase(this.nbrOfCorrectGuesses, this.nbrOfQuestions));
+    this.speakService.speak(`Vill du spela igen?`);
     this.gameOverText = `Du klarade ${this.nbrOfCorrectGuesses} av ${this.nbrOfQuestions}`;
   }
 
   playAgain(): void {
+    this.pauseNbrOfSeconds(3);
     this.speakService.speak(`Vi spelar en gång till!`, true);
     this.resetGame();
     setTimeout(() => {
@@ -84,6 +93,13 @@ export class GuessLetterComponent implements OnInit {
     this.nbrOfCorrectGuesses = 0;
     this.nbrOfGuesses = 0;
     this.letters = ['?', '?', '?', '?'];
+  }
+
+  pauseNbrOfSeconds(sec: number): void {
+    this.pause = true;
+    setTimeout(() => {
+      this.pause = false;
+      }, sec * 1000);
   }
 
   selectLetter(guess: string): void {
