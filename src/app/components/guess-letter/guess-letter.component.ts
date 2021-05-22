@@ -14,7 +14,7 @@ export class GuessLetterComponent implements OnInit {
   public correctLetter: string;
   public guessedLetter: string;
   public correct;
-  public nbrOfQuestions = 1;
+  public nbrOfQuestions = 10;
   public nbrOfGuesses = 0;
   public nbrOfCorrectGuesses = 0;
   public gameOverText;
